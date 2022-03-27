@@ -244,7 +244,8 @@ Public Class Form1
     Private Sub LoadConfigs()
 
         For Each s As String In Me.TextBox1.Lines
-            Dim str2() As String = Split(s, ",")
+            Dim str2() As String = Split(s, "=")
+
         Next
 
     End Sub
