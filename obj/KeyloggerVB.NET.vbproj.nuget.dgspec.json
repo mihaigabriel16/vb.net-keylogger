@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Projects\\Hacking\\KeyloggerVB.NET\\KeyloggerVB.NET\\KeyloggerVB.NET.vbproj": {}
+    "D:\\Projects\\Hacking\\vb.net-keylogger\\KeyloggerVB.NET.vbproj": {}
   },
   "projects": {
-    "D:\\Projects\\Hacking\\KeyloggerVB.NET\\KeyloggerVB.NET\\KeyloggerVB.NET.vbproj": {
+    "D:\\Projects\\Hacking\\vb.net-keylogger\\KeyloggerVB.NET.vbproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Projects\\Hacking\\KeyloggerVB.NET\\KeyloggerVB.NET\\KeyloggerVB.NET.vbproj",
+        "projectUniqueName": "D:\\Projects\\Hacking\\vb.net-keylogger\\KeyloggerVB.NET.vbproj",
         "projectName": "KeyloggerVB.NET",
-        "projectPath": "D:\\Projects\\Hacking\\KeyloggerVB.NET\\KeyloggerVB.NET\\KeyloggerVB.NET.vbproj",
+        "projectPath": "D:\\Projects\\Hacking\\vb.net-keylogger\\KeyloggerVB.NET.vbproj",
         "packagesPath": "C:\\Users\\mihai\\.nuget\\packages\\",
-        "outputPath": "D:\\Projects\\Hacking\\KeyloggerVB.NET\\KeyloggerVB.NET\\obj\\",
+        "outputPath": "D:\\Projects\\Hacking\\vb.net-keylogger\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\mihai\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -57,7 +57,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.200\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

