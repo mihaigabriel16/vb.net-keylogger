@@ -6,6 +6,8 @@
     <StartupObject>Sub Main</StartupObject>
     <UseWindowsForms>true</UseWindowsForms>
     <MyType>WindowsForms</MyType>
+    <AssemblyName>vbnetkl</AssemblyName>
+    <RootNamespace>vbnetkl</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

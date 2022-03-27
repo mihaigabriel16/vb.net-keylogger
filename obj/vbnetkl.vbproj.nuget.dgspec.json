@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Projects\\Hacking\\vb.net-keylogger\\KeyloggerVB.NET.vbproj": {}
+    "D:\\Projects\\Hacking\\vb.net-keylogger\\vbnetkl.vbproj": {}
   },
   "projects": {
-    "D:\\Projects\\Hacking\\vb.net-keylogger\\KeyloggerVB.NET.vbproj": {
+    "D:\\Projects\\Hacking\\vb.net-keylogger\\vbnetkl.vbproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Projects\\Hacking\\vb.net-keylogger\\KeyloggerVB.NET.vbproj",
+        "projectUniqueName": "D:\\Projects\\Hacking\\vb.net-keylogger\\vbnetkl.vbproj",
         "projectName": "vbnetkl",
-        "projectPath": "D:\\Projects\\Hacking\\vb.net-keylogger\\KeyloggerVB.NET.vbproj",
+        "projectPath": "D:\\Projects\\Hacking\\vb.net-keylogger\\vbnetkl.vbproj",
         "packagesPath": "C:\\Users\\mihai\\.nuget\\packages\\",
         "outputPath": "D:\\Projects\\Hacking\\vb.net-keylogger\\obj\\",
         "projectStyle": "PackageReference",

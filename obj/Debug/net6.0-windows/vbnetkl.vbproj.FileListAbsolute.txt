@@ -1,0 +1,17 @@
+D:\Projects\Hacking\vb.net-keylogger\bin\Debug\net6.0-windows\vbnetkl.exe
+D:\Projects\Hacking\vb.net-keylogger\bin\Debug\net6.0-windows\vbnetkl.deps.json
+D:\Projects\Hacking\vb.net-keylogger\bin\Debug\net6.0-windows\vbnetkl.runtimeconfig.json
+D:\Projects\Hacking\vb.net-keylogger\bin\Debug\net6.0-windows\vbnetkl.dll
+D:\Projects\Hacking\vb.net-keylogger\bin\Debug\net6.0-windows\vbnetkl.pdb
+D:\Projects\Hacking\vb.net-keylogger\obj\Debug\net6.0-windows\vbnetkl.vbproj.AssemblyReference.cache
+D:\Projects\Hacking\vb.net-keylogger\obj\Debug\net6.0-windows\vbnetkl.Form1.resources
+D:\Projects\Hacking\vb.net-keylogger\obj\Debug\net6.0-windows\vbnetkl.vbproj.GenerateResource.cache
+D:\Projects\Hacking\vb.net-keylogger\obj\Debug\net6.0-windows\vbnetkl.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projects\Hacking\vb.net-keylogger\obj\Debug\net6.0-windows\vbnetkl.AssemblyInfoInputs.cache
+D:\Projects\Hacking\vb.net-keylogger\obj\Debug\net6.0-windows\vbnetkl.AssemblyInfo.vb
+D:\Projects\Hacking\vb.net-keylogger\obj\Debug\net6.0-windows\vbnetkl.vbproj.CoreCompileInputs.cache
+D:\Projects\Hacking\vb.net-keylogger\obj\Debug\net6.0-windows\vbnetkl.dll
+D:\Projects\Hacking\vb.net-keylogger\obj\Debug\net6.0-windows\refint\vbnetkl.dll
+D:\Projects\Hacking\vb.net-keylogger\obj\Debug\net6.0-windows\vbnetkl.pdb
+D:\Projects\Hacking\vb.net-keylogger\obj\Debug\net6.0-windows\vbnetkl.genruntimeconfig.cache
+D:\Projects\Hacking\vb.net-keylogger\obj\Debug\net6.0-windows\ref\vbnetkl.dll

